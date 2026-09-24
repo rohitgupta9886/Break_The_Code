@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "glass" | "destructive";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "glass" | "destructive" | "success" | "tech";
   size?: "sm" | "md" | "lg" | "icon";
   isLoading?: boolean;
 }
@@ -10,28 +10,32 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", isLoading, children, disabled, ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none";
+      "inline-flex items-center justify-center font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none cursor-pointer";
 
     const variants = {
       primary:
-        "bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm hover:shadow glow-primary",
+        "bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm hover:shadow-md hover:shadow-primary/20",
       secondary:
-        "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border/50",
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border/70 hover:border-border",
       outline:
-        "border border-border bg-transparent hover:bg-muted/50 text-foreground",
+        "border border-border/80 bg-card/60 hover:bg-surface-hover hover:border-primary/40 text-foreground",
       ghost:
-        "hover:bg-muted/60 text-foreground",
+        "hover:bg-muted/70 text-foreground hover:text-foreground",
       glass:
-        "glass-panel text-foreground hover:bg-card/80 shadow-sm",
+        "bg-card/70 border border-border/80 text-foreground hover:bg-card/90 shadow-sm",
       destructive:
-        "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+        "bg-destructive/15 text-rose-400 border border-rose-500/30 hover:bg-destructive/25 shadow-sm",
+      success:
+        "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 shadow-sm",
+      tech:
+        "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/25 shadow-sm",
     };
 
     const sizes = {
-      sm: "h-8 px-3 text-xs rounded-md gap-1.5",
-      md: "h-10 px-4 text-sm rounded-lg gap-2",
-      lg: "h-12 px-6 text-base rounded-xl gap-2.5 font-semibold",
-      icon: "h-10 w-10 rounded-lg p-0",
+      sm: "h-8 px-3 text-xs rounded-lg gap-1.5",
+      md: "h-9.5 px-4 text-sm rounded-xl gap-2",
+      lg: "h-11 px-5 text-sm sm:text-base rounded-xl gap-2.5 font-semibold",
+      icon: "h-9 w-9 rounded-xl p-0",
     };
 
     return (

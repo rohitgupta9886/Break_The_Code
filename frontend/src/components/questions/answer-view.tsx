@@ -47,10 +47,10 @@ export const AnswerView: React.FC<AnswerViewProps> = ({ question }) => {
   ];
 
   return (
-    <div className="rounded-3xl border border-emerald-200/90 dark:border-emerald-900/60 bg-[#ecfdf5] dark:bg-emerald-950/25 overflow-hidden shadow-sm shadow-emerald-100/50 space-y-0">
+    <div className="rounded-2xl border border-border/80 bg-surface overflow-hidden shadow-elevation-1 space-y-0">
       
       {/* Top Navigation Tabs */}
-      <div className="flex items-center gap-2 p-2.5 bg-emerald-100/40 dark:bg-emerald-900/20 border-b border-emerald-200/80 dark:border-emerald-900/50 overflow-x-auto scrollbar-none">
+      <div className="flex items-center gap-1.5 p-2 bg-surface-elevated/70 border-b border-border/70 overflow-x-auto scrollbar-none">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -59,13 +59,13 @@ export const AnswerView: React.FC<AnswerViewProps> = ({ question }) => {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
               className={cn(
-                "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer",
+                "flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer",
                 isActive
-                  ? "bg-white dark:bg-emerald-900/80 text-emerald-800 dark:text-emerald-100 shadow-sm border border-emerald-300 dark:border-emerald-700 font-bold"
-                  : "text-muted-foreground hover:text-foreground hover:bg-emerald-50 dark:hover:bg-emerald-900/40"
+                  ? "bg-primary/10 text-primary shadow-2xs border border-primary/25 font-bold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-surface"
               )}
             >
-              <Icon className={cn("h-4 w-4", isActive ? "text-emerald-600 dark:text-emerald-300" : "text-muted-foreground")} />
+              <Icon className={cn("h-4 w-4", isActive ? "text-primary" : "text-muted-foreground")} />
               <span>{tab.label}</span>
             </button>
           );
@@ -78,40 +78,40 @@ export const AnswerView: React.FC<AnswerViewProps> = ({ question }) => {
         {/* Tab 1: Interview-Ready Model Answer */}
         {activeTab === "answer" && (
           <div className="space-y-6 animate-fade-in">
-            {/* Direct Answer Summary - Rose Theme Subcard */}
+            {/* Direct Answer Summary */}
             {question.short_answer && (
-              <div className="p-5 rounded-2xl bg-[#fff1f4] dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-900/60 text-sm sm:text-base space-y-2 shadow-xs">
-                <span className="font-bold text-rose-700 dark:text-rose-300 uppercase tracking-wider text-xs flex items-center gap-1.5">
+              <div className="p-5 rounded-xl bg-primary/5 border border-primary/20 text-sm sm:text-base space-y-2 shadow-2xs">
+                <span className="font-bold text-primary uppercase tracking-wider text-xs flex items-center gap-1.5">
                   <Sparkles className="h-4 w-4" />
                   Direct Answer · 30-Second Elevator Pitch
                 </span>
-                <div className="text-foreground font-semibold answer-lead">
+                <div className="text-foreground font-medium answer-lead">
                   <FormattedAnswer text={question.short_answer} variant="lead" />
                 </div>
               </div>
             )}
 
-            {/* Model Spoken Response - Mint Crisp Theme Subcard */}
-            <div className="space-y-3">
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+            {/* Model Spoken Response */}
+            <div className="space-y-2.5">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
                 Interview-Ready Answer (Full Verbal Response)
               </span>
-              <div className="p-6 sm:p-7 rounded-2xl bg-white/90 dark:bg-black/30 border border-emerald-200/90 dark:border-emerald-900/60 answer-lead text-foreground/95 shadow-xs">
+              <div className="p-6 sm:p-7 rounded-xl bg-surface-elevated/70 border border-border/80 answer-lead text-foreground/95 shadow-2xs">
                 <FormattedAnswer text={question.interview_ready_answer} variant="lead" />
               </div>
             </div>
 
-            {/* Follow-up Questions Section - Purple Theme Subcards */}
+            {/* Follow-up Questions Section */}
             {question.followups && question.followups.length > 0 && (
-              <div className="pt-5 border-t border-emerald-200/60 dark:border-emerald-900/40 space-y-3.5">
+              <div className="pt-5 border-t border-border/60 space-y-3.5">
                 <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
-                  <HelpCircle className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  <HelpCircle className="h-4 w-4 text-primary" />
                   <span>Expected Follow-up Questions in the Interview</span>
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {question.followups.map((f) => (
-                    <div key={f.id} className="p-4 rounded-2xl bg-[#f5f3ff] dark:bg-purple-950/30 border border-purple-200/90 dark:border-purple-900/60 text-xs sm:text-sm space-y-2 shadow-xs">
-                      <p className="font-bold text-purple-950 dark:text-purple-100 text-sm sm:text-base">&ldquo;{f.followup_question}&rdquo;</p>
+                    <div key={f.id} className="p-4 rounded-xl bg-surface-elevated border border-border/80 text-xs sm:text-sm space-y-2 shadow-2xs">
+                      <p className="font-bold text-foreground text-sm sm:text-base">&ldquo;{f.followup_question}&rdquo;</p>
                       {f.answer_guidance && (
                         <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                           <strong className="text-foreground">Response Key:</strong> {f.answer_guidance}

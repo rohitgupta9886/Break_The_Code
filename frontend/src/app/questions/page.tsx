@@ -135,20 +135,20 @@ function QuestionsContent() {
           <ChevronRight className="h-3.5 w-3.5" />
           <span className="font-bold text-primary">{selectedTech ? selectedTech.toUpperCase() : "PRACTICE TRACKS"}</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="font-mono text-xs px-2.5 py-0.5 rounded-md bg-amber-100/90 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 font-semibold border border-amber-200/90 dark:border-amber-900/60">
+          <span className="font-mono text-xs px-2.5 py-0.5 rounded-md bg-primary/10 text-primary font-semibold border border-primary/20">
             Interactive Practice Studio
           </span>
         </nav>
 
         {/* Dual Mode Switcher - Positioned on EXACT SAME Right Side under Navbar */}
-        <div className="inline-flex items-center p-1.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/15 to-rose-500/20 border-2 border-amber-400/80 dark:border-amber-500/70 shadow-lg shadow-amber-500/10 flex-wrap gap-2 self-start md:self-auto shrink-0">
-          <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-500 via-amber-600 to-orange-600 text-white shadow-md shadow-amber-500/30">
-            <span className="relative flex h-2.5 w-2.5">
+        <div className="inline-flex items-center p-1 rounded-xl bg-surface-elevated border border-border/80 shadow-2xs flex-wrap gap-1.5 self-start md:self-auto shrink-0">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-primary text-primary-foreground shadow-xs shadow-primary/20">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <Target className="h-4 w-4" />
-            <span>Practice Mode (Active)</span>
+            <Target className="h-3.5 w-3.5" />
+            <span>Practice Mode</span>
           </span>
 
           <Link
@@ -160,12 +160,12 @@ function QuestionsContent() {
             }}
             onMouseEnter={() => router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`)}
             onTouchStart={() => router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`)}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-rose-500/20 hover:bg-rose-500 text-rose-900 dark:text-rose-100 hover:text-white border border-rose-500/50 hover:border-rose-500 transition-all duration-200 group shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface transition-all group cursor-pointer"
             title="Switch to Single-Page Reading Mode with Complete Answers"
           >
-            <BookOpen className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:scale-110 transition-transform" />
-            <span>Switch to Reading Mode</span>
-            <ArrowRight className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
+            <BookOpen className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <span>Reading Mode</span>
+            <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </div>

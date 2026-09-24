@@ -23,96 +23,15 @@ interface QuestionCardProps {
   colorIndex?: number;
 }
 
-const cardThemes = [
-  {
-    bg: "bg-[#fff1f4] dark:bg-rose-950/30",
-    border: "border-rose-200/90 dark:border-rose-900/60 hover:border-rose-400 dark:hover:border-rose-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-rose-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-rose-600 dark:group-hover:text-rose-400",
-    accentBorder: "border-rose-200/70 dark:border-rose-900/50",
-    pillBg: "bg-rose-100/80 text-rose-800 dark:bg-rose-900/40 dark:text-rose-200",
-  },
-  {
-    bg: "bg-[#f5f3ff] dark:bg-purple-950/30",
-    border: "border-purple-200/90 dark:border-purple-900/60 hover:border-purple-400 dark:hover:border-purple-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-purple-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-purple-600 dark:group-hover:text-purple-400",
-    accentBorder: "border-purple-200/70 dark:border-purple-900/50",
-    pillBg: "bg-purple-100/80 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200",
-  },
-  {
-    bg: "bg-[#fffbeb] dark:bg-amber-950/30",
-    border: "border-amber-200/90 dark:border-amber-900/60 hover:border-amber-400 dark:hover:border-amber-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-amber-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-amber-600 dark:group-hover:text-amber-400",
-    accentBorder: "border-amber-200/70 dark:border-amber-900/50",
-    pillBg: "bg-amber-100/80 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200",
-  },
-  {
-    bg: "bg-[#ecfdf5] dark:bg-emerald-950/30",
-    border: "border-emerald-200/90 dark:border-emerald-900/60 hover:border-emerald-400 dark:hover:border-emerald-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-emerald-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-emerald-600 dark:group-hover:text-emerald-400",
-    accentBorder: "border-emerald-200/70 dark:border-emerald-900/50",
-    pillBg: "bg-emerald-100/80 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200",
-  },
-  {
-    bg: "bg-[#f0f9ff] dark:bg-sky-950/30",
-    border: "border-sky-200/90 dark:border-sky-900/60 hover:border-sky-400 dark:hover:border-sky-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-sky-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-sky-600 dark:group-hover:text-sky-400",
-    accentBorder: "border-sky-200/70 dark:border-sky-900/50",
-    pillBg: "bg-sky-100/80 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200",
-  },
-  {
-    bg: "bg-[#fff7ed] dark:bg-orange-950/30",
-    border: "border-orange-200/90 dark:border-orange-900/60 hover:border-orange-400 dark:hover:border-orange-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-orange-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-orange-600 dark:group-hover:text-orange-400",
-    accentBorder: "border-orange-200/70 dark:border-orange-900/50",
-    pillBg: "bg-orange-100/80 text-orange-800 dark:bg-orange-900/40 dark:text-orange-200",
-  },
-  {
-    bg: "bg-[#fdf4ff] dark:bg-fuchsia-950/30",
-    border: "border-fuchsia-200/90 dark:border-fuchsia-900/60 hover:border-fuchsia-400 dark:hover:border-fuchsia-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-fuchsia-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-400",
-    accentBorder: "border-fuchsia-200/70 dark:border-fuchsia-900/50",
-    pillBg: "bg-fuchsia-100/80 text-fuchsia-800 dark:bg-fuchsia-900/40 dark:text-fuchsia-200",
-  },
-  {
-    bg: "bg-[#f0fdfa] dark:bg-teal-950/30",
-    border: "border-teal-200/90 dark:border-teal-900/60 hover:border-teal-400 dark:hover:border-teal-600",
-    hoverShadow: "hover:shadow-lg hover:shadow-teal-100/70 dark:hover:shadow-none",
-    titleHover: "group-hover:text-teal-600 dark:group-hover:text-teal-400",
-    accentBorder: "border-teal-200/70 dark:border-teal-900/50",
-    pillBg: "bg-teal-100/80 text-teal-800 dark:bg-teal-900/40 dark:text-teal-200",
-  },
-];
-
-function getHash(str: string) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash << 5) - hash + str.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
-
-const QuestionCardComponent: React.FC<QuestionCardProps> = ({ question, colorIndex }) => {
+const QuestionCardComponent: React.FC<QuestionCardProps> = ({ question }) => {
   const [isSaved, setIsSaved] = useState(false);
-
-  const themeIdx = colorIndex !== undefined 
-    ? Math.abs(colorIndex) % cardThemes.length 
-    : getHash(question.id || question.slug) % cardThemes.length;
-  const theme = cardThemes[themeIdx];
 
   const isProduction = question.difficulty === "PRODUCTION_SCENARIO" || question.scenario_type === "PRODUCTION_OUTAGE";
 
   return (
     <div
       onMouseEnter={() => prefetchQuestion(question.slug)}
-      className={`group rounded-2xl border ${theme.border} ${theme.bg} p-6 ${theme.hoverShadow} transition-all duration-200 flex flex-col justify-between gap-5 relative`}
+      className="group rounded-2xl border border-border/70 hover:border-border-hover bg-surface hover:bg-surface-elevated/70 p-5 sm:p-6 shadow-2xs hover:shadow-elevation-1 transition-all duration-200 flex flex-col justify-between gap-5 relative"
     >
       {/* Top Meta Header */}
       <div className="space-y-3.5">
@@ -133,7 +52,7 @@ const QuestionCardComponent: React.FC<QuestionCardProps> = ({ question, colorInd
 
         {/* Question Title - Proportional Font & Style */}
         <Link href={`/questions/${question.slug}`} className="block">
-          <h3 className={`text-base sm:text-lg font-black text-foreground ${theme.titleHover} transition-colors leading-snug tracking-tight`}>
+          <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug tracking-tight">
             {question.title}
           </h3>
         </Link>
@@ -141,8 +60,8 @@ const QuestionCardComponent: React.FC<QuestionCardProps> = ({ question, colorInd
         {/* Real Interview Company Provenance */}
         {question.tags && question.tags.length > 0 && (
           <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-            <span className="text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-wider">
-              <Building2 className="h-3 w-3 text-rose-500" />
+            <span className="text-xs font-semibold text-muted-foreground flex items-center gap-1 uppercase tracking-wider">
+              <Building2 className="h-3 w-3 text-indigo-400" />
               <span>Real Interview:</span>
             </span>
             {question.tags.map((tag) => {
@@ -214,7 +133,7 @@ const QuestionCardComponent: React.FC<QuestionCardProps> = ({ question, colorInd
       </div>
 
       {/* Bottom Action Buttons: [Think] [View Answer] [Save] */}
-      <div className={`pt-4 border-t ${theme.accentBorder} flex items-center justify-between text-xs sm:text-sm`}>
+      <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs sm:text-sm">
         <div className="flex items-center gap-2.5">
           {/* Think Mode Action */}
           <Link

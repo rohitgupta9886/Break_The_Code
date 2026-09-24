@@ -184,9 +184,9 @@ export function FormattedAnswer({
           return (
             <h4
               key={idx}
-              className="text-base sm:text-lg font-black text-rose-600 dark:text-rose-400 mt-5 mb-2.5 flex items-center gap-2 tracking-tight"
+              className="text-base sm:text-lg font-bold text-foreground mt-5 mb-2.5 flex items-center gap-2.5 tracking-tight"
             >
-              <span className="h-2 w-2 rounded-full bg-rose-500 shadow-xs shrink-0" />
+              <span className="h-2 w-2 rounded-full bg-primary shadow-xs shrink-0" />
               <span>{block.body}</span>
             </h4>
           );
@@ -196,14 +196,14 @@ export function FormattedAnswer({
           return (
             <div
               key={idx}
-              className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl bg-white/80 dark:bg-card/70 border border-border/70 hover:border-rose-300 dark:hover:border-rose-900/60 shadow-xs transition-colors"
+              className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl bg-card border border-border/70 hover:border-primary/40 shadow-xs transition-colors"
             >
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-rose-500/15 text-rose-700 dark:text-rose-300 font-black text-xs shrink-0 mt-0.5 border border-rose-500/25 shadow-2xs">
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-primary/10 text-primary font-bold text-xs shrink-0 mt-0.5 border border-primary/20 shadow-2xs">
                 {block.num}
               </span>
               <div className="space-y-1 text-[15px] sm:text-base leading-relaxed text-foreground/95 flex-1">
                 {block.heading && (
-                  <span className="font-extrabold text-rose-600 dark:text-rose-400 mr-2 text-[15px] sm:text-base">
+                  <span className="font-bold text-primary mr-2 text-[15px] sm:text-base">
                     {block.heading}:
                   </span>
                 )}
@@ -219,10 +219,10 @@ export function FormattedAnswer({
               key={idx}
               className="flex items-start gap-2.5 pl-1 text-[15px] sm:text-base leading-relaxed text-foreground/95"
             >
-              <span className="mt-2.5 h-2 w-2 rounded-full bg-rose-500 shrink-0 shadow-xs" />
+              <span className="mt-2.5 h-2 w-2 rounded-full bg-primary/80 shrink-0 shadow-xs" />
               <div className="flex-1">
                 {block.heading && (
-                  <span className="font-bold text-rose-600 dark:text-rose-400 mr-1.5">
+                  <span className="font-bold text-primary mr-1.5">
                     {block.heading}:
                   </span>
                 )}

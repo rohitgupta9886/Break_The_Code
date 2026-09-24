@@ -33,58 +33,58 @@ const techStyles: Record<string, {
   icon: any;
 }> = {
   langgraph: {
-    color: "#7c3aed",
-    cardBg: "bg-[#f5f3ff] dark:bg-purple-950/25",
-    badgeBg: "bg-purple-100/90 dark:bg-purple-900/50",
-    badgeText: "text-purple-800 dark:text-purple-200",
-    borderColor: "border-purple-200/90 dark:border-purple-900/60",
-    hoverBorder: "hover:border-purple-400 dark:hover:border-purple-600",
-    iconBg: "bg-purple-100 text-purple-700 dark:bg-purple-900/60 dark:text-purple-300",
-    iconColor: "text-purple-600",
+    color: "#8b5cf6",
+    cardBg: "bg-surface hover:bg-surface-elevated/70",
+    badgeBg: "bg-purple-500/10",
+    badgeText: "text-purple-600 dark:text-purple-300",
+    borderColor: "border-purple-500/25",
+    hoverBorder: "hover:border-purple-500/50",
+    iconBg: "bg-purple-500/10 text-purple-600 dark:text-purple-300",
+    iconColor: "text-purple-500",
     icon: Cpu,
   },
   "rag-vector-db": {
-    color: "#06b6d4",
-    cardBg: "bg-[#f0f9ff] dark:bg-sky-950/25",
-    badgeBg: "bg-sky-100/90 dark:bg-sky-900/50",
-    badgeText: "text-sky-800 dark:text-sky-200",
-    borderColor: "border-sky-200/90 dark:border-sky-900/60",
-    hoverBorder: "hover:border-sky-400 dark:hover:border-sky-600",
-    iconBg: "bg-sky-100 text-sky-700 dark:bg-sky-900/60 dark:text-sky-300",
-    iconColor: "text-sky-600",
+    color: "#0284c7",
+    cardBg: "bg-surface hover:bg-surface-elevated/70",
+    badgeBg: "bg-sky-500/10",
+    badgeText: "text-sky-600 dark:text-sky-300",
+    borderColor: "border-sky-500/25",
+    hoverBorder: "hover:border-sky-500/50",
+    iconBg: "bg-sky-500/10 text-sky-600 dark:text-sky-300",
+    iconColor: "text-sky-500",
     icon: Database,
   },
   "java-backend": {
-    color: "#ea580c",
-    cardBg: "bg-[#fff7ed] dark:bg-orange-950/25",
-    badgeBg: "bg-orange-100/90 dark:bg-orange-900/50",
-    badgeText: "text-orange-800 dark:text-orange-200",
-    borderColor: "border-orange-200/90 dark:border-orange-900/60",
-    hoverBorder: "hover:border-orange-400 dark:hover:border-orange-600",
-    iconBg: "bg-orange-100 text-orange-700 dark:bg-orange-900/60 dark:text-orange-300",
-    iconColor: "text-orange-600",
+    color: "#f59e0b",
+    cardBg: "bg-surface hover:bg-surface-elevated/70",
+    badgeBg: "bg-amber-500/10",
+    badgeText: "text-amber-600 dark:text-amber-300",
+    borderColor: "border-amber-500/25",
+    hoverBorder: "hover:border-amber-500/50",
+    iconBg: "bg-amber-500/10 text-amber-600 dark:text-amber-300",
+    iconColor: "text-amber-500",
     icon: Terminal,
   },
   dsa: {
-    color: "#e11d48",
-    cardBg: "bg-[#fff1f4] dark:bg-rose-950/25",
-    badgeBg: "bg-rose-100/90 dark:bg-rose-900/50",
-    badgeText: "text-rose-800 dark:text-rose-200",
-    borderColor: "border-rose-200/90 dark:border-rose-900/60",
-    hoverBorder: "hover:border-rose-400 dark:hover:border-rose-600",
-    iconBg: "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300",
-    iconColor: "text-rose-600",
+    color: "#10b981",
+    cardBg: "bg-surface hover:bg-surface-elevated/70",
+    badgeBg: "bg-emerald-500/10",
+    badgeText: "text-emerald-600 dark:text-emerald-300",
+    borderColor: "border-emerald-500/25",
+    hoverBorder: "hover:border-emerald-500/50",
+    iconBg: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300",
+    iconColor: "text-emerald-500",
     icon: Binary,
   },
   "system-design": {
-    color: "#0d9488",
-    cardBg: "bg-[#f0fdfa] dark:bg-teal-950/25",
-    badgeBg: "bg-teal-100/90 dark:bg-teal-900/50",
-    badgeText: "text-teal-800 dark:text-teal-200",
-    borderColor: "border-teal-200/90 dark:border-teal-900/60",
-    hoverBorder: "hover:border-teal-400 dark:hover:border-teal-600",
-    iconBg: "bg-teal-100 text-teal-700 dark:bg-teal-900/60 dark:text-teal-300",
-    iconColor: "text-teal-600",
+    color: "#6366f1",
+    cardBg: "bg-surface hover:bg-surface-elevated/70",
+    badgeBg: "bg-indigo-500/10",
+    badgeText: "text-indigo-600 dark:text-indigo-300",
+    borderColor: "border-indigo-500/25",
+    hoverBorder: "hover:border-indigo-500/50",
+    iconBg: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-300",
+    iconColor: "text-indigo-500",
     icon: Layers,
   },
 };
@@ -198,33 +198,33 @@ export const TrackGrid: React.FC<TrackGridProps> = ({ technologies }) => {
                   )}
 
                   {/* Dual Mode Actions */}
-                  <div className="space-y-2.5 pt-3 border-t border-border/40">
+                  <div className="space-y-2 pt-3 border-t border-border/50">
                     <Link
                       href={`/questions-and-answers/${tech.slug}`}
-                      className="flex flex-col p-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white shadow-sm hover:shadow-md transition-all duration-150 group"
+                      className="flex flex-col p-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-xs shadow-primary/20 transition-all duration-150 group"
                     >
-                      <div className="flex items-center justify-between font-extrabold text-xs">
+                      <div className="flex items-center justify-between font-bold text-xs">
                         <span className="flex items-center gap-1.5">
                           <BookOpen className="h-4 w-4 shrink-0" />
                           <span>Read Questions &amp; Answers</span>
                         </span>
                         <ArrowRight className="h-3.5 w-3.5 opacity-90 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <span className="text-[11px] text-rose-100/90 leading-tight mt-1 text-left">
+                      <span className="text-[11px] text-primary-foreground/80 leading-tight mt-1 text-left">
                         Read Mode: Read, revise and understand all interview questions on one page.
                       </span>
                     </Link>
 
                     <Link
                       href={`/questions?technology=${tech.slug}`}
-                      className="flex flex-col p-3 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-800 dark:text-amber-200 transition-all duration-150 group shadow-2xs"
+                      className="flex flex-col p-3 rounded-xl bg-surface-elevated hover:bg-surface-hover border border-border/80 text-foreground transition-all duration-150 group shadow-2xs"
                     >
-                      <div className="flex items-center justify-between font-extrabold text-xs">
+                      <div className="flex items-center justify-between font-bold text-xs">
                         <span className="flex items-center gap-1.5">
                           <Zap className="h-4 w-4 text-amber-500 shrink-0" />
                           <span>Practice Mode</span>
                         </span>
-                        <ArrowRight className="h-3.5 w-3.5 text-amber-500 opacity-80 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
                       </div>
                       <span className="text-[11px] text-muted-foreground leading-tight mt-1 text-left">
                         Practice Mode: Test your knowledge with interactive question-by-question practice.

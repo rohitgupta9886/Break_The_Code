@@ -106,38 +106,38 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
   };
 
   return (
-    <div className="rounded-3xl border border-amber-200/90 dark:border-amber-900/60 bg-[#fffbeb] dark:bg-amber-950/25 p-7 sm:p-8 shadow-sm shadow-amber-100/50 space-y-6">
+    <div className="rounded-2xl border border-border/80 bg-surface p-6 sm:p-8 shadow-elevation-1 space-y-6">
       {/* Top Header: Think Mode Title + Live Stopwatch */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-amber-200/80 dark:border-amber-900/50">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/60">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
             <h3 className="font-bold text-lg sm:text-xl text-foreground tracking-tight flex items-center gap-2">
-              Think Mode · Active Practice
+              Think Mode · Interview Simulation Cockpit
             </h3>
           </div>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Formulate your response under real interview pressure before revealing the ideal answer.
+            Formulate your response under real interview conditions before reviewing the benchmark answer.
           </p>
         </div>
 
         {/* Stopwatch Controller */}
-        <div className="flex items-center gap-2.5 bg-white/70 dark:bg-black/20 px-4 py-2 rounded-xl border border-amber-200/80 dark:border-amber-900/50 shadow-xs">
-          <Timer className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-          <span className="font-mono text-lg font-bold text-foreground min-w-[55px]">
+        <div className="flex items-center gap-2.5 bg-surface-elevated px-4 py-2 rounded-xl border border-border/80 shadow-2xs">
+          <Timer className={`h-4.5 w-4.5 ${isActive ? "text-amber-400 animate-pulse" : "text-muted-foreground"}`} />
+          <span className="font-mono text-base sm:text-lg font-bold text-foreground min-w-[55px]">
             {formatTime(seconds)}
           </span>
-          <div className="flex items-center gap-1.5 ml-2">
+          <div className="flex items-center gap-1.5 ml-2 border-l border-border/60 pl-2">
             <button
               onClick={toggleTimer}
-              className="p-1.5 rounded-lg hover:bg-amber-100/60 dark:hover:bg-amber-900/30 text-muted-foreground hover:text-foreground transition-colors"
-              title={isActive ? "Pause" : "Start"}
+              className="p-1.5 rounded-lg hover:bg-surface text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              title={isActive ? "Pause Timer" : "Start Timer"}
             >
-              {isActive ? <Pause className="h-4.5 w-4.5 text-amber-500" /> : <Play className="h-4.5 w-4.5 text-emerald-500" />}
+              {isActive ? <Pause className="h-4 w-4 text-amber-400" /> : <Play className="h-4 w-4 text-emerald-400" />}
             </button>
             <button
               onClick={resetTimer}
-              className="p-1.5 rounded-lg hover:bg-amber-100/60 dark:hover:bg-amber-900/30 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-1.5 rounded-lg hover:bg-surface text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               title="Reset Timer"
             >
               <RotateCcw className="h-4 w-4" />
@@ -147,10 +147,10 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
       </div>
 
       {/* Answer Draft Input Area */}
-      <div className="space-y-2.5">
-        <label className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wider flex items-center justify-between">
-          <span>Draft Your Interview Answer</span>
-          <span className="text-xs font-normal lowercase">{candidateAnswer.split(/\s+/).filter(Boolean).length} words</span>
+      <div className="space-y-2">
+        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center justify-between">
+          <span>Draft Your Technical Answer</span>
+          <span className="text-xs font-mono font-normal lowercase">{candidateAnswer.split(/\s+/).filter(Boolean).length} words</span>
         </label>
         <textarea
           rows={5}
@@ -159,8 +159,8 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
             setCandidateAnswer(e.target.value);
             if (!isActive && seconds === 0) setIsActive(true); // Auto-start timer on typing
           }}
-          placeholder="I would begin by explaining the core mechanism, then walk through distributed failure scenarios and trade-offs..."
-          className="w-full rounded-2xl border border-amber-200/90 dark:border-amber-900/60 bg-white/80 dark:bg-black/30 p-4 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all leading-relaxed"
+          placeholder="Structure your answer: 1. Core mechanism & invariants, 2. Concurrency/latency trade-offs, 3. Failure modes & mitigation..."
+          className="w-full rounded-xl border border-border/80 bg-surface-elevated/70 p-4 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all leading-relaxed"
         />
       </div>
 
@@ -313,46 +313,66 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
 
       {/* AI Evaluation Scorecard (when returned) */}
       {evaluation && (
-        <div className="mt-6 p-6 rounded-2xl bg-muted/30 border border-primary/30 space-y-5 animate-fade-in glow-cyan">
+        <div className="mt-6 p-6 rounded-2xl bg-surface-elevated/70 border border-primary/30 space-y-5 animate-fade-in shadow-elevation-1">
           <div className="flex items-center justify-between border-b border-border/60 pb-3">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-primary" />
               <h4 className="font-bold text-sm text-foreground">Google Gemini AI Evaluation Scorecard</h4>
             </div>
-            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary font-bold text-sm">
-              <span>{evaluation.overall_score}</span>
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary font-bold text-sm">
+              <span className="text-base">{evaluation.overall_score}</span>
               <span className="text-xs font-normal text-muted-foreground">/ 10</span>
             </div>
           </div>
 
           {/* 4 Rubric Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div className="p-3 rounded-xl bg-card border border-border/60">
-              <span className="text-[11px] text-muted-foreground uppercase font-semibold">Correctness</span>
-              <p className="text-lg font-extrabold text-foreground mt-1">{evaluation.correctness?.score ?? 7}/10</p>
+            <div className="p-3.5 rounded-xl bg-surface border border-border/80 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] text-muted-foreground uppercase font-semibold">Correctness</span>
+                <p className="text-xl font-bold text-foreground mt-1">{evaluation.correctness?.score ?? 7}/10</p>
+                <div className="w-full bg-border/60 rounded-full h-1 mt-2 overflow-hidden">
+                  <div className="bg-emerald-500 h-1 rounded-full" style={{ width: `${((evaluation.correctness?.score ?? 7) / 10) * 100}%` }} />
+                </div>
+              </div>
               {evaluation.correctness?.feedback && (
-                <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{evaluation.correctness.feedback}</p>
+                <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2">{evaluation.correctness.feedback}</p>
               )}
             </div>
-            <div className="p-3 rounded-xl bg-card border border-border/60">
-              <span className="text-[11px] text-muted-foreground uppercase font-semibold">Completeness</span>
-              <p className="text-lg font-extrabold text-foreground mt-1">{evaluation.completeness?.score ?? 7}/10</p>
+            <div className="p-3.5 rounded-xl bg-surface border border-border/80 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] text-muted-foreground uppercase font-semibold">Completeness</span>
+                <p className="text-xl font-bold text-foreground mt-1">{evaluation.completeness?.score ?? 7}/10</p>
+                <div className="w-full bg-border/60 rounded-full h-1 mt-2 overflow-hidden">
+                  <div className="bg-sky-500 h-1 rounded-full" style={{ width: `${((evaluation.completeness?.score ?? 7) / 10) * 100}%` }} />
+                </div>
+              </div>
               {evaluation.completeness?.feedback && (
-                <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{evaluation.completeness.feedback}</p>
+                <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2">{evaluation.completeness.feedback}</p>
               )}
             </div>
-            <div className="p-3 rounded-xl bg-card border border-border/60">
-              <span className="text-[11px] text-muted-foreground uppercase font-semibold">Technical Depth</span>
-              <p className="text-lg font-extrabold text-foreground mt-1">{evaluation.technical_depth?.score ?? 7}/10</p>
+            <div className="p-3.5 rounded-xl bg-surface border border-border/80 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] text-muted-foreground uppercase font-semibold">Depth</span>
+                <p className="text-xl font-bold text-foreground mt-1">{evaluation.technical_depth?.score ?? 7}/10</p>
+                <div className="w-full bg-border/60 rounded-full h-1 mt-2 overflow-hidden">
+                  <div className="bg-indigo-500 h-1 rounded-full" style={{ width: `${((evaluation.technical_depth?.score ?? 7) / 10) * 100}%` }} />
+                </div>
+              </div>
               {evaluation.technical_depth?.feedback && (
-                <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{evaluation.technical_depth.feedback}</p>
+                <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2">{evaluation.technical_depth.feedback}</p>
               )}
             </div>
-            <div className="p-3 rounded-xl bg-card border border-border/60">
-              <span className="text-[11px] text-muted-foreground uppercase font-semibold">Clarity</span>
-              <p className="text-lg font-extrabold text-foreground mt-1">{evaluation.clarity?.score ?? 8}/10</p>
+            <div className="p-3.5 rounded-xl bg-surface border border-border/80 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] text-muted-foreground uppercase font-semibold">Clarity</span>
+                <p className="text-xl font-bold text-foreground mt-1">{evaluation.clarity?.score ?? 8}/10</p>
+                <div className="w-full bg-border/60 rounded-full h-1 mt-2 overflow-hidden">
+                  <div className="bg-purple-500 h-1 rounded-full" style={{ width: `${((evaluation.clarity?.score ?? 8) / 10) * 100}%` }} />
+                </div>
+              </div>
               {evaluation.clarity?.feedback && (
-                <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{evaluation.clarity.feedback}</p>
+                <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2">{evaluation.clarity.feedback}</p>
               )}
             </div>
           </div>

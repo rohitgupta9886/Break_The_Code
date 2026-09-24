@@ -18,7 +18,7 @@ export const MobileNav: React.FC = () => {
   ];
 
   return (
-    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 h-16 bg-white/95 dark:bg-[#140a10]/95 backdrop-blur-xl border-t border-rose-200/80 dark:border-rose-900/60 flex items-center justify-around px-2 shadow-lg shadow-rose-100/30">
+    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 h-16 bg-background/90 backdrop-blur-xl border-t border-border/80 flex items-center justify-around px-2 shadow-elevation-2">
       {navItems.map((item) => {
         const Icon = item.icon;
         const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
@@ -29,11 +29,11 @@ export const MobileNav: React.FC = () => {
             className={cn(
               "flex flex-col items-center justify-center gap-1 py-1 px-3 rounded-xl text-[11px] font-semibold transition-all",
               isActive 
-                ? "text-rose-600 dark:text-rose-400 font-bold bg-rose-100/80 dark:bg-rose-950/50" 
+                ? "text-primary font-bold bg-primary/10 border border-primary/20" 
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <Icon className={cn("h-4 w-4", isActive && "stroke-[2.5px] scale-110")} />
+            <Icon className={cn("h-4 w-4", isActive && "stroke-[2.5px] scale-105")} />
             <span>{item.label}</span>
           </Link>
         );

@@ -139,7 +139,7 @@ export const DifficultyTierBar: React.FC<DifficultyTierBarProps> = ({
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-foreground">
             Difficulty Progression
           </span>
-          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 border border-rose-500/20">
+          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/25">
             8 Tiers
           </span>
         </div>
@@ -174,7 +174,7 @@ export const DifficultyTierBar: React.FC<DifficultyTierBarProps> = ({
           onClick={() => onSelectDifficulty("")}
           className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all duration-200 group relative ${
             isAllSelected
-              ? "bg-primary text-primary-foreground border-primary shadow-md shadow-rose-500/20"
+              ? "bg-primary text-primary-foreground border-primary shadow-sm shadow-primary/25"
               : "bg-background/60 hover:bg-muted/60 border-border/70 text-foreground hover:border-primary/40"
           }`}
         >

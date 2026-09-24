@@ -4,7 +4,7 @@ import { Logo } from "./logo";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-rose-200/80 dark:border-rose-900/60 bg-white/60 dark:bg-[#140a10]/60 mt-auto pb-16 sm:pb-0 backdrop-blur-md">
+    <footer className="w-full border-t border-border/70 bg-surface/40 mt-auto pb-16 sm:pb-0 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
