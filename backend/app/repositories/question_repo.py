@@ -49,21 +49,20 @@ class QuestionRepository(BaseRepository[Question]):
         conditions = [Question.status == "PUBLISHED"]
 
         if params.technology:
-            # Match either slug or id
-            conditions.append(
-                or_(
-                    Question.technology_id == params.technology,
-                    Question.technology.has(Technology.slug == params.technology)
+            tech_id = await self.session.scalar(
+                select(Technology.id).where(
+                    or_(Technology.slug == params.technology, Technology.id == params.technology)
                 )
             )
+            conditions.append(Question.technology_id == (tech_id or params.technology))
 
         if params.topic:
-            conditions.append(
-                or_(
-                    Question.topic_id == params.topic,
-                    Question.topic.has(Topic.slug == params.topic)
+            topic_id = await self.session.scalar(
+                select(Topic.id).where(
+                    or_(Topic.slug == params.topic, Topic.id == params.topic)
                 )
             )
+            conditions.append(Question.topic_id == (topic_id or params.topic))
 
         if params.difficulty:
             conditions.append(Question.difficulty == params.difficulty.upper())
@@ -93,6 +92,7 @@ class QuestionRepository(BaseRepository[Question]):
             select(Question)
             .options(
                 selectinload(Question.technology),
+                selectinload(Question.topic),
                 selectinload(Question.tags)
             )
             .where(and_(*conditions))
@@ -138,8 +138,16 @@ class QuestionRepository(BaseRepository[Question]):
         return technology, questions
 
     async def increment_view_count(self, question: Question) -> None:
-        question.view_count += 1
-        await self.session.commit()
+        try:
+            from sqlalchemy import update
+            await self.session.execute(
+                update(Question)
+                .where(Question.id == question.id)
+                .values(view_count=Question.view_count + 1)
+            )
+            await self.session.commit()
+        except Exception:
+            pass
 
     async def toggle_bookmark(self, user_id: str, question_id: str) -> bool:
         stmt = select(Bookmark).where(Bookmark.user_id == user_id, Bookmark.question_id == question_id)

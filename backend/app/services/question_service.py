@@ -20,11 +20,16 @@ from app.schemas.question import (
 _READING_MODE_CACHE: Dict[str, Tuple[Dict[str, Any], float]] = {}
 _CACHE_TTL_SECONDS = 600.0
 
+# In-memory TTL cache for question listings: {filter_hash: (result, timestamp)}
+_LIST_QUESTIONS_CACHE: Dict[str, Tuple[Tuple[List[dict], int], float]] = {}
+_LIST_CACHE_TTL_SECONDS = 60.0
+
 def invalidate_reading_mode_cache(technology_slug: Optional[str] = None):
     if technology_slug:
         _READING_MODE_CACHE.pop(technology_slug, None)
     else:
         _READING_MODE_CACHE.clear()
+    _LIST_QUESTIONS_CACHE.clear()
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
@@ -50,6 +55,12 @@ class QuestionService:
         return question
 
     async def list_questions(self, params: QuestionFilterParams) -> Tuple[List[dict], int]:
+        cache_key = f"{params.technology}:{params.topic}:{params.difficulty}:{params.interview_depth}:{params.question_type}:{params.search}:{params.page}:{params.limit}"
+        now = time.time()
+        cached = _LIST_QUESTIONS_CACHE.get(cache_key)
+        if cached and (now - cached[1] < _LIST_CACHE_TTL_SECONDS):
+            return cached[0]
+
         questions, total = await self.question_repo.list_questions(params)
         
         cards = []
@@ -73,7 +84,12 @@ class QuestionService:
                 "tags": [{"name": t.name, "slug": t.slug} for t in q.tags] if q.tags else [],
                 "created_at": q.created_at
             })
-        return cards, total
+
+        result = (cards, total)
+        if len(_LIST_QUESTIONS_CACHE) > 300:
+            _LIST_QUESTIONS_CACHE.clear()
+        _LIST_QUESTIONS_CACHE[cache_key] = (result, now)
+        return result
 
     async def create_question(self, q_in: QuestionCreateSchema, user_id: Optional[str] = None) -> Question:
         slug = q_in.slug or slugify(q_in.title)

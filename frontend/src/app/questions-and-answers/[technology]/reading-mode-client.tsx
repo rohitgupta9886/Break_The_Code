@@ -655,8 +655,9 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                   Reset All Filters
                 </button>
               </div>
-            ) : (
-              filteredTiers.map((tier) => {
+            ) : (() => {
+              let cumulativeRendered = 0;
+              return filteredTiers.map((tier) => {
                 // Determine which questions in this tier to render based on progressive count
                 const questionsToRender = tier.questions.filter(() => {
                   cumulativeRendered++;
@@ -997,8 +998,8 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
 
                   </section>
                 );
-              })
-            )}
+              });
+            })()}
 
             {/* Load More Button if progressive mounting has more items */}
             {renderedCount < totalFilteredQuestions && (

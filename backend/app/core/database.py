@@ -1,11 +1,12 @@
 from typing import AsyncGenerator
+from sqlalchemy import event
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import declarative_base
 from app.core.config import settings
 
 # Engine configuration: support SQLite and Postgres
 is_sqlite = settings.DATABASE_URL.startswith("sqlite")
-connect_args = {"check_same_thread": False} if is_sqlite else {}
+connect_args = {"check_same_thread": False, "timeout": 30} if is_sqlite else {}
 
 engine_kwargs = {
     "echo": False,
@@ -23,6 +24,20 @@ if not is_sqlite:
     })
 
 engine = create_async_engine(settings.DATABASE_URL, **engine_kwargs)
+
+if is_sqlite:
+    @event.listens_for(engine.sync_engine, "connect")
+    def set_sqlite_pragma(dbapi_connection, connection_record):
+        try:
+            cursor = dbapi_connection.cursor()
+            cursor.execute("PRAGMA journal_mode=WAL")
+            cursor.execute("PRAGMA synchronous=NORMAL")
+            cursor.execute("PRAGMA cache_size=-64000")  # 64MB cache
+            cursor.execute("PRAGMA temp_store=MEMORY")
+            cursor.execute("PRAGMA mmap_size=268435456") # 256MB memory mapping
+            cursor.close()
+        except Exception:
+            pass
 
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,

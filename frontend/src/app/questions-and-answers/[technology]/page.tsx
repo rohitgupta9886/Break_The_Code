@@ -65,12 +65,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+import { Suspense } from "react";
 import { fetchReadingMode } from "@/lib/api";
+import Loading from "./loading";
 
 export const revalidate = 180; // ISR cache for 3 minutes
 
 export default async function QuestionsAndAnswersPage({ params }: PageProps) {
   const { technology: techSlug } = await params;
-  const initialData = await fetchReadingMode(techSlug);
-  return <ReadingModeClient techSlug={techSlug} initialData={initialData} />;
+  return <ReadingModeClient techSlug={techSlug} />;
 }

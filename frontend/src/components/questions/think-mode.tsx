@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Timer, Play, Pause, RotateCcw, Lightbulb, Send, Eye, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatTime } from "@/lib/utils";
+import { formatTime, cn } from "@/lib/utils";
 import { evaluateAnswer, fetchSocraticHint, AnswerEvaluationData } from "@/lib/api";
 
 import { useAuth } from "@/lib/auth-context";
@@ -38,6 +38,7 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
   const [isRequestingAIHint, setIsRequestingAIHint] = useState(false);
   const [dynamicAiHints, setDynamicAiHints] = useState<Array<{ level: number; type: string; question: string; clue: string }>>([]);
   const [rewardNotice, setRewardNotice] = useState<{ xp: number; streak?: number; badges?: string[] } | null>(null);
+  const [editorFont, setEditorFont] = useState<"mono" | "sans">("mono");
 
   // Live timer effect
   useEffect(() => {
@@ -148,19 +149,37 @@ export const ThinkMode: React.FC<ThinkModeProps> = ({
 
       {/* Answer Draft Input Area */}
       <div className="space-y-2.5">
-        <label className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wider flex items-center justify-between">
-          <span>Draft Your Interview Answer</span>
-          <span className="text-xs font-normal lowercase">{candidateAnswer.split(/\s+/).filter(Boolean).length} words</span>
-        </label>
+        <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+          <label htmlFor="technical-answer-input" className="cursor-pointer">
+            Draft Your Technical Answer
+          </label>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setEditorFont(editorFont === "mono" ? "sans" : "mono")}
+              className="text-[11px] font-mono px-2 py-0.5 rounded-md border border-amber-300/60 dark:border-amber-700/50 hover:bg-amber-100/60 dark:hover:bg-amber-900/40 text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-2xs lowercase"
+              title="Toggle editor font between JetBrains Mono and Inter Sans"
+            >
+              font: <span className="font-bold text-foreground">{editorFont === "mono" ? "jetbrains-mono" : "inter-sans"}</span>
+            </button>
+            <span className="text-xs font-normal lowercase">{candidateAnswer.split(/\s+/).filter(Boolean).length} words</span>
+          </div>
+        </div>
         <textarea
-          rows={5}
+          id="technical-answer-input"
+          rows={6}
           value={candidateAnswer}
           onChange={(e) => {
             setCandidateAnswer(e.target.value);
             if (!isActive && seconds === 0) setIsActive(true); // Auto-start timer on typing
           }}
           placeholder="I would begin by explaining the core mechanism, then walk through distributed failure scenarios and trade-offs..."
-          className="w-full rounded-2xl border border-amber-200/90 dark:border-amber-900/60 bg-white/80 dark:bg-black/30 p-4 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all leading-relaxed"
+          className={cn(
+            "w-full rounded-2xl border border-amber-200/90 dark:border-amber-700/60 bg-white/95 dark:bg-[#1a0f16] p-4 text-sm sm:text-base text-zinc-900 dark:text-zinc-50 placeholder:font-sans placeholder:text-muted-foreground/70 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all leading-relaxed shadow-xs caret-amber-600 dark:caret-amber-400 [color-scheme:light] dark:[color-scheme:dark]",
+            editorFont === "mono"
+              ? "font-mono tracking-tight font-normal text-[14px] sm:text-[14.5px]"
+              : "font-sans tracking-normal font-normal text-sm sm:text-base"
+          )}
         />
       </div>
 

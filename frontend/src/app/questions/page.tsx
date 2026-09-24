@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Search, BookOpen, Target, ArrowRight, ChevronRight } from "lucide-react";
-import { fetchQuestions, fetchTechnologies, getCachedData, QuestionCardData, TechnologyData } from "@/lib/api";
+import { fetchQuestions, fetchTechnologies, getCachedData, prefetchReadingModeTrack, QuestionCardData, TechnologyData } from "@/lib/api";
 import { QuestionCard } from "@/components/questions/question-card";
 import { FilterSidebar } from "@/components/questions/filter-sidebar";
 import { DifficultyTierBar } from "@/components/questions/difficulty-tier-bar";
@@ -18,6 +18,7 @@ function QuestionsContent() {
   const [total, setTotal] = useState(0);
   const [technologies, setTechnologies] = useState<TechnologyData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isNavigatingToReading, setIsNavigatingToReading] = useState(false);
 
   const initialSearch = searchParams.get("search") || "";
   const initialTech = searchParams.get("technology") || "";
@@ -38,10 +39,11 @@ function QuestionsContent() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  // Pre-warm the alternate Reading Mode route so clicking is instantaneous
+  // Pre-warm the alternate Reading Mode route & data so clicking is instantaneous
   useEffect(() => {
     const targetTech = selectedTech || "langgraph";
     router.prefetch(`/questions-and-answers/${targetTech}`);
+    prefetchReadingModeTrack(targetTech);
   }, [router, selectedTech]);
 
   // Load technologies taxonomy
@@ -154,18 +156,30 @@ function QuestionsContent() {
           <Link
             href={`/questions-and-answers/${selectedTech || "langgraph"}`}
             prefetch={true}
-            onClick={(e) => {
-              e.preventDefault();
-              router.push(`/questions-and-answers/${selectedTech || "langgraph"}`);
+            onClick={() => setIsNavigatingToReading(true)}
+            onMouseEnter={() => {
+              router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`);
+              prefetchReadingModeTrack(selectedTech || "langgraph");
             }}
-            onMouseEnter={() => router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`)}
-            onTouchStart={() => router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`)}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-rose-500/20 hover:bg-rose-500 text-rose-900 dark:text-rose-100 hover:text-white border border-rose-500/50 hover:border-rose-500 transition-all duration-200 group shadow-xs cursor-pointer"
+            onTouchStart={() => {
+              router.prefetch(`/questions-and-answers/${selectedTech || "langgraph"}`);
+              prefetchReadingModeTrack(selectedTech || "langgraph");
+            }}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-rose-500/20 hover:bg-rose-500 text-rose-900 dark:text-rose-100 hover:text-white border border-rose-500/50 hover:border-rose-500 transition-all duration-200 group shadow-xs cursor-pointer active:scale-95"
             title="Switch to Single-Page Reading Mode with Complete Answers"
           >
-            <BookOpen className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:scale-110 transition-transform" />
-            <span>Switch to Reading Mode</span>
-            <ArrowRight className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
+            {isNavigatingToReading ? (
+              <>
+                <span className="inline-block h-4 w-4 border-2 border-rose-500 border-t-transparent rounded-full animate-spin" />
+                <span>Opening Reading Mode...</span>
+              </>
+            ) : (
+              <>
+                <BookOpen className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:scale-110 transition-transform" />
+                <span>Switch to Reading Mode</span>
+                <ArrowRight className="h-4 w-4 text-rose-600 dark:text-rose-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
           </Link>
         </div>
       </div>

@@ -88,11 +88,11 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full max-w-[100vw] border-b border-rose-200/90 dark:border-rose-900/60 bg-white/95 dark:bg-[#0d0610]/95 backdrop-blur-2xl shadow-[0_4px_30px_-6px_rgba(244,63,94,0.14)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.7)] transition-colors">
+      <header suppressHydrationWarning className="sticky top-0 z-40 w-full max-w-[100vw] border-b border-rose-200/90 dark:border-rose-900/60 bg-white/95 dark:bg-[#0d0610]/95 backdrop-blur-2xl shadow-[0_4px_30px_-6px_rgba(244,63,94,0.14)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.7)] transition-colors">
         {/* Top Iridescent Gradient Energy Bar */}
         <div className="h-[2.5px] w-full bg-gradient-to-r from-rose-500 via-pink-500 via-amber-400 to-rose-500 opacity-90" />
 
-        <div className="w-full flex h-20 items-center justify-between px-3 sm:px-6 lg:px-8 xl:px-12 gap-2 sm:gap-4 lg:gap-6">
+        <div suppressHydrationWarning className="w-full flex h-24 sm:h-28 items-center justify-between px-3 sm:px-6 lg:px-8 xl:px-12 gap-2 sm:gap-4 lg:gap-6">
           
           {/* 1. Left: Enhanced Logo & Brandmark */}
           <div className="flex items-center gap-3 xl:gap-6 shrink-0">
@@ -150,24 +150,6 @@ export const Navbar: React.FC = () => {
             {/* User Authentication / Profile */}
             {user ? (
               <div className="flex items-center gap-2 sm:gap-2.5">
-                {/* Streak Badge */}
-                <div
-                  title={`${user.streak_days} Day Streak`}
-                  className="flex items-center gap-1.5 h-11 px-3.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-bold shadow-2xs"
-                >
-                  <Flame className="h-4 w-4 fill-amber-500 text-amber-500 animate-pulse" />
-                  <span>{user.streak_days}d</span>
-                </div>
-
-                {/* XP Level Badge */}
-                <div
-                  title={`Level ${user.level} (${user.xp} XP)`}
-                  className="hidden md:flex items-center gap-1.5 h-11 px-3.5 rounded-2xl bg-rose-100/90 dark:bg-rose-950/60 border border-rose-200/90 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-bold shadow-2xs"
-                >
-                  <Zap className="h-4 w-4 fill-rose-500 text-rose-500" />
-                  <span>Lvl {user.level}</span>
-                </div>
-
                 {/* User Dropdown */}
                 <div className="relative">
                   <button
@@ -182,17 +164,38 @@ export const Navbar: React.FC = () => {
 
                   {isUserMenuOpen && (
                     <div
-                      className="absolute right-0 mt-2 w-64 rounded-2xl border border-rose-200/90 dark:border-rose-900/60 bg-card p-2 shadow-2xl z-50 animate-fade-in"
+                      className="absolute right-0 mt-2 w-72 rounded-2xl border border-rose-200/90 dark:border-rose-900/60 bg-card p-2 shadow-2xl z-50 animate-fade-in"
                       onMouseLeave={() => setIsUserMenuOpen(false)}
                     >
-                      <div className="px-3 py-2.5 border-b border-border/60 mb-1.5 flex items-start justify-between">
-                        <div className="truncate mr-2">
-                          <p className="text-sm font-bold text-foreground truncate">{user.full_name || "Candidate"}</p>
-                          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                      <div className="px-3 py-2.5 border-b border-border/60 mb-2 space-y-2.5">
+                        <div className="flex items-start justify-between">
+                          <div className="truncate mr-2">
+                            <p className="text-sm font-bold text-foreground truncate">{user.full_name || "Candidate"}</p>
+                            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                          </div>
+                          <span className="text-[10px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900 shrink-0">
+                            {user.roles?.[0]?.name || "USER"}
+                          </span>
                         </div>
-                        <span className="text-[10px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900 shrink-0">
-                          {user.roles?.[0]?.name || "USER"}
-                        </span>
+
+                        {/* User Streak & Level Details */}
+                        <div className="grid grid-cols-2 gap-2 pt-1">
+                          <div
+                            title={`${user.streak_days} Day Streak`}
+                            className="flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-bold shadow-2xs"
+                          >
+                            <Flame className="h-4 w-4 fill-amber-500 text-amber-500 animate-pulse shrink-0" />
+                            <span>{user.streak_days}d Streak</span>
+                          </div>
+
+                          <div
+                            title={`Level ${user.level} (${user.xp} XP)`}
+                            className="flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-rose-100/90 dark:bg-rose-950/60 border border-rose-200/90 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-bold shadow-2xs"
+                          >
+                            <Zap className="h-4 w-4 fill-rose-500 text-rose-500 shrink-0" />
+                            <span>Lvl {user.level} ({user.xp} XP)</span>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Admin Links if user is an Administrator */}

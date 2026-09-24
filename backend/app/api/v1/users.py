@@ -157,7 +157,7 @@ async def get_user_dashboard(
         weak_topics = ["Distributed Systems & Consensus", "Advanced Cache Invalidation"]
 
     # Daily challenge question
-    attempted_qids = {a.question_id for a in attempts}
+    attempted_qids = {a.question_id for a in recent_attempts_rows}
     unattempted_stmt = (
         select(Question)
         .options(selectinload(Question.technology))

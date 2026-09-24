@@ -85,8 +85,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="overflow-x-hidden max-w-full">
+    <html lang="en" className="overflow-x-hidden max-w-full" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -94,7 +97,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased font-sans overflow-x-hidden max-w-full touch-pan-y">
+      <body
+        className="min-h-screen flex flex-col bg-background text-foreground antialiased font-sans overflow-x-hidden max-w-full touch-pan-y"
+        suppressHydrationWarning
+      >
         <AuthProvider>
           <Navbar />
           <main className="flex-1 w-full">{children}</main>

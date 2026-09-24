@@ -335,7 +335,7 @@ export async function fetchQuestions(params: {
 
   return dedupe(cacheKey, async () => {
     try {
-      const res = await fetch(`${API_BASE}/questions?${query.toString()}`);
+      const res = await fetch(`${API_BASE}/questions?${query.toString()}`, { next: { revalidate: 60 } });
       if (!res.ok) throw new Error("Failed to load questions");
       const json = await res.json();
       const result = {
@@ -359,7 +359,7 @@ export async function fetchQuestionBySlug(slug: string): Promise<QuestionDetailD
 
   return dedupe(cacheKey, async () => {
     try {
-      const res = await fetch(`${API_BASE}/questions/${slug}`);
+      const res = await fetch(`${API_BASE}/questions/${slug}`, { next: { revalidate: 120 } });
       if (!res.ok) return null;
       const json = await res.json();
       if (json.data) {
@@ -375,7 +375,7 @@ export async function fetchQuestionBySlug(slug: string): Promise<QuestionDetailD
 
 export async function fetchReadingMode(technologySlug: string): Promise<ReadingModeData | null> {
   const cacheKey = `reading-mode:${technologySlug}`;
-  const cached = getCachedData<ReadingModeData>(cacheKey, 180 * 1000);
+  const cached = getCachedData<ReadingModeData>(cacheKey, 300 * 1000);
   if (cached) return cached;
 
   return dedupe(cacheKey, async () => {

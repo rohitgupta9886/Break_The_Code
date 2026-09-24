@@ -20,6 +20,27 @@ async def lifespan(app: FastAPI):
     # Initialize schema on startup (especially for SQLite or development environments)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+    # Pre-warm high-traffic reading mode caches in background
+    async def warm_cache():
+        try:
+            import asyncio
+            from app.core.database import AsyncSessionLocal
+            from app.services.question_service import QuestionService
+            await asyncio.sleep(0.5)
+            async with AsyncSessionLocal() as s:
+                qs = QuestionService(s)
+                for slug in ["langgraph", "java-backend", "rag-vector-db", "dsa", "system-design"]:
+                    try:
+                        await qs.get_reading_mode_data(slug)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+    import asyncio
+    asyncio.create_task(warm_cache())
+
     yield
     await engine.dispose()
 
