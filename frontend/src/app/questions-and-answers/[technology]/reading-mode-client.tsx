@@ -265,7 +265,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
   if (loading || !data) {
     return (
       <div className="min-h-screen bg-background text-foreground pb-24 touch-pan-y">
-        <header className="border-b border-border/80 bg-surface/50">
+        <header className="border-b border-rose-200/80 dark:border-rose-900/60 bg-gradient-to-b from-rose-50/50 via-background to-background dark:from-rose-950/20 dark:via-background dark:to-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-8 sm:pb-10 space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground flex-wrap font-medium">
@@ -275,19 +275,19 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                 <ChevronRight className="h-3.5 w-3.5" />
                 <span className="font-bold text-primary">{fallbackTechName}</span>
                 <ChevronRight className="h-3.5 w-3.5" />
-                <span className="font-mono text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary font-semibold border border-primary/25">
+                <span className="font-mono text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-rose-100/90 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-semibold border border-rose-200/90 dark:border-rose-900/60">
                   Q&A Reading Mode
                 </span>
               </nav>
 
-              <div className="inline-flex items-center p-1 rounded-xl bg-surface-elevated border border-border/80 shadow-2xs flex-wrap gap-1.5 self-start md:self-auto shrink-0">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-primary text-primary-foreground shadow-xs shadow-primary/20">
-                  <span className="relative flex h-2 w-2">
+              <div className="inline-flex items-center p-1.5 rounded-2xl bg-gradient-to-r from-rose-500/20 via-pink-500/15 to-amber-500/20 border-2 border-rose-400/80 dark:border-rose-500/70 shadow-lg shadow-rose-500/10 flex-wrap gap-2 self-start md:self-auto shrink-0">
+                <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 text-white shadow-md shadow-rose-600/30">
+                  <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
                   </span>
-                  <BookOpen className="h-3.5 w-3.5" />
-                  <span>Reading Mode</span>
+                  <BookOpen className="h-4 w-4" />
+                  <span>Reading Mode (Active)</span>
                 </span>
 
                 <Link
@@ -297,18 +297,18 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                     e.preventDefault();
                     router.push(`/questions?technology=${techSlug}`);
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface transition-all group cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-500/20 hover:bg-amber-500 text-amber-900 dark:text-amber-100 hover:text-white border border-amber-500/50 hover:border-amber-500 transition-all duration-200 group shadow-xs cursor-pointer"
                 >
-                  <Target className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <Target className="h-4 w-4 text-amber-600 dark:text-amber-400 group-hover:text-white group-hover:scale-110 transition-transform" />
                   <span>Switch to Practice Mode</span>
-                  <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight className="h-4 w-4 text-amber-600 dark:text-amber-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
 
             <div className="space-y-3 max-w-4xl">
-              <div className="h-10 sm:h-12 w-3/4 bg-muted/70 rounded-2xl animate-pulse" />
-              <div className="h-5 w-1/2 bg-muted/50 rounded-xl animate-pulse" />
+              <div className="h-10 sm:h-12 w-3/4 bg-rose-200/40 dark:bg-rose-950/40 rounded-2xl animate-pulse" />
+              <div className="h-5 w-1/2 bg-muted/60 rounded-xl animate-pulse" />
             </div>
           </div>
         </header>
@@ -333,7 +333,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
   return (
     <div className="min-h-screen bg-background text-foreground pb-24 touch-pan-y">
       {/* 1. Header Banner */}
-      <header className="border-b border-border/80 bg-surface/50">
+      <header className="border-b border-rose-200/80 dark:border-rose-900/60 bg-gradient-to-b from-rose-50/50 via-background to-background dark:from-rose-950/20 dark:via-background dark:to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-8 sm:pb-10 space-y-6">
           
           {/* Top Bar: Breadcrumbs on Left, Mode Switcher on Right (Under Navbar) */}
@@ -345,20 +345,20 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="font-bold text-primary">{technology.name}</span>
               <ChevronRight className="h-3.5 w-3.5" />
-              <span className="font-mono text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary font-semibold border border-primary/25">
+              <span className="font-mono text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-rose-100/90 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-semibold border border-rose-200/90 dark:border-rose-900/60">
                 Q&A Reading Mode
               </span>
             </nav>
 
             {/* Dual Mode Switcher - Positioned on Right Side under Navbar */}
-            <div className="inline-flex items-center p-1 rounded-xl bg-surface-elevated border border-border/80 shadow-2xs flex-wrap gap-1.5 self-start md:self-auto shrink-0">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-primary text-primary-foreground shadow-xs shadow-primary/20">
-                <span className="relative flex h-2 w-2">
+            <div className="inline-flex items-center p-1.5 rounded-2xl bg-gradient-to-r from-rose-500/20 via-pink-500/15 to-amber-500/20 border-2 border-rose-400/80 dark:border-rose-500/70 shadow-lg shadow-rose-500/10 flex-wrap gap-2 self-start md:self-auto shrink-0">
+              <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 text-white shadow-md shadow-rose-600/30">
+                <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
                 </span>
-                <BookOpen className="h-3.5 w-3.5" />
-                <span>Reading Mode</span>
+                <BookOpen className="h-4 w-4" />
+                <span>Reading Mode (Active)</span>
               </span>
 
               <Link
@@ -370,12 +370,12 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                 }}
                 onMouseEnter={() => router.prefetch(`/questions?technology=${technology.slug}`)}
                 onTouchStart={() => router.prefetch(`/questions?technology=${technology.slug}`)}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface transition-all group cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-500/20 hover:bg-amber-500 text-amber-900 dark:text-amber-100 hover:text-white border border-amber-500/50 hover:border-amber-500 transition-all duration-200 group shadow-xs cursor-pointer"
                 title="Switch to Interactive Practice Mode with Think Mode & AI Evaluation"
               >
-                <Target className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <Target className="h-4 w-4 text-amber-600 dark:text-amber-400 group-hover:text-white group-hover:scale-110 transition-transform" />
                 <span>Switch to Practice Mode</span>
-                <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="h-4 w-4 text-amber-600 dark:text-amber-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -391,7 +391,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
           </div>
 
           {/* Track Summary Badges & Reading Progress */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-4 border-t border-border/60">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-4 border-t border-rose-200/60 dark:border-rose-900/40">
             <div className="p-3 sm:p-3.5 rounded-2xl bg-card border border-border/80 space-y-0.5 sm:space-y-1 shadow-2xs">
               <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-bold">Total Questions</span>
               <p className="text-xl sm:text-2xl font-black text-foreground">{totalQuestions}</p>
@@ -399,7 +399,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
             
             <div className="p-3 sm:p-3.5 rounded-2xl bg-card border border-border/80 space-y-0.5 sm:space-y-1 shadow-2xs">
               <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-bold">Calibrated Tiers</span>
-              <p className="text-xl sm:text-2xl font-black text-primary">{summary.total_tiers} Tiers</p>
+              <p className="text-xl sm:text-2xl font-black text-rose-600 dark:text-rose-400">{summary.total_tiers} Tiers</p>
             </div>
 
             <div className="p-3 sm:p-3.5 rounded-2xl bg-card border border-border/80 space-y-1 shadow-2xs col-span-2">
@@ -409,7 +409,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
               </div>
               <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-500 transition-all duration-300 rounded-full"
+                  className="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-emerald-500 transition-all duration-300 rounded-full"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -420,20 +420,20 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
       </header>
 
       {/* 2. Sticky Control Bar - Fixed at top-20 to avoid Navbar overlap */}
-      <div className="sticky top-20 z-30 w-full bg-surface/90 backdrop-blur-xl border-b border-border/70 shadow-2xs">
+      <div className="sticky top-20 z-30 w-full bg-white/95 dark:bg-[#0c050d]/95 backdrop-blur-xl border-b border-rose-200/80 dark:border-rose-900/60 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-2.5">
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
             {/* Search Input */}
             <div className="relative flex-1 w-full max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-primary pointer-events-none" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-rose-500 pointer-events-none" />
               <input
                 type="text"
                 aria-label="Search questions, answers, and concepts"
                 placeholder="Search questions, code, gotchas..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 pl-10 pr-10 rounded-xl text-xs sm:text-sm bg-surface-elevated border border-border/80 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-foreground placeholder:text-muted-foreground"
+                className="w-full h-11 pl-10 pr-10 rounded-xl text-xs sm:text-sm bg-rose-50/50 dark:bg-black/30 border border-rose-200/80 dark:border-rose-900/60 focus:outline-none focus:ring-2 focus:ring-rose-500/50 text-foreground placeholder:text-muted-foreground"
               />
               {searchQuery && (
                 <button
@@ -451,10 +451,10 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
               {/* Interview-Ready Toggle */}
               <button
                 onClick={() => setInterviewReadyOnly(!interviewReadyOnly)}
-                className={`inline-flex items-center justify-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                className={`inline-flex items-center justify-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                   interviewReadyOnly
-                    ? "bg-primary text-primary-foreground border-primary shadow-xs"
-                    : "bg-surface text-muted-foreground hover:text-foreground border-border/80"
+                    ? "bg-rose-500 text-white border-rose-500 shadow-xs"
+                    : "bg-card text-muted-foreground hover:text-foreground border-border/80"
                 }`}
                 title="Highlight concise elevator-pitch answers for rapid revision"
               >
@@ -568,7 +568,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                   onClick={() => setSelectedType(isSelected && typeKey !== "ALL" ? "ALL" : typeKey)}
                   className={`min-h-[34px] px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer shrink-0 ${
                     isSelected
-                      ? "bg-primary text-primary-foreground shadow-2xs font-bold"
+                      ? "bg-rose-500 text-white shadow-2xs"
                       : "bg-muted/60 text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -605,7 +605,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                     className="flex items-center justify-between text-xs font-bold text-foreground px-2 hover:text-primary transition-colors"
                   >
                     <span className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-primary" />
+                      <span className="h-2 w-2 rounded-full bg-rose-500" />
                       <span>{tier.level_code} {tier.label}</span>
                     </span>
                     <span className="font-mono text-[11px] text-muted-foreground">({tier.questions.length})</span>
@@ -669,7 +669,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                   <section key={tier.tier} id={`tier-${tier.tier.toLowerCase()}`} className="space-y-6 scroll-mt-36">
                     
                     {/* Tier Header Card */}
-                    <div className="p-5 sm:p-6 rounded-2xl bg-surface border border-border/80 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-rose-100/60 via-background to-card dark:from-rose-950/30 dark:via-background dark:to-card border border-rose-200/90 dark:border-rose-900/60 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className={`text-xs font-mono font-extrabold px-3 py-1 rounded-full border shadow-2xs ${tier.badge_color}`}>
@@ -688,7 +688,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                       </div>
 
                       <div className="text-left sm:text-right shrink-0">
-                        <span className="text-2xl sm:text-3xl font-black text-primary">
+                        <span className="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400">
                           {tier.questions.length}
                         </span>
                         <span className="block text-[11px] font-mono text-muted-foreground uppercase font-semibold">
@@ -708,17 +708,17 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                           <article
                             key={q.id}
                             id={`q-${q.slug}`}
-                            className={`cv-auto rounded-2xl border transition-all duration-200 bg-surface overflow-hidden scroll-mt-48 shadow-2xs ${
+                            className={`cv-auto rounded-3xl border transition-all duration-200 bg-card overflow-hidden scroll-mt-48 shadow-xs ${
                               isRead
                                 ? "border-emerald-500/30 bg-emerald-500/[0.02]"
-                                : "border-border/80 hover:border-border-hover"
+                                : "border-border/80 hover:border-rose-300 dark:hover:border-rose-800"
                             }`}
                           >
                             {/* Question Card Header (Always Visible) */}
                             <div className="p-5 sm:p-6 space-y-3">
                               <div className="flex items-center justify-between gap-2 flex-wrap">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-surface-elevated text-foreground/80 border border-border/80">
+                                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
                                     Q{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
                                   </span>
                                   <DifficultyBadge difficulty={q.difficulty} size="sm" />
@@ -753,8 +753,8 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                               {/* Company Provenance Tags */}
                               {q.tags && q.tags.length > 0 && (
                                 <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                                  <span className="text-xs font-semibold text-muted-foreground flex items-center gap-1 uppercase tracking-wider">
-                                    <Building2 className="h-3 w-3 text-indigo-400" />
+                                  <span className="text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-wider">
+                                    <Building2 className="h-3 w-3 text-rose-500" />
                                     <span>Real Loop:</span>
                                   </span>
                                   {q.tags.map((tag) => (
@@ -847,16 +847,16 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
 
                             {/* Expandable Complete Answer Area */}
                             {isExpanded && (
-                              <div className="border-t border-border/80 bg-surface-elevated/40 p-5 sm:p-7 space-y-6">
+                              <div className="border-t border-rose-200/80 dark:border-rose-900/60 bg-[#fffbfc] dark:bg-[#150912]/50 p-5 sm:p-7 space-y-6">
                                 
                                 {/* 1. Interview-Ready Direct Answer (Elevator Pitch) */}
                                 {q.interview_ready_answer && (
-                                  <div className="p-5 sm:p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-3">
-                                    <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-primary">
-                                      <Sparkles className="h-4 w-4 text-primary" />
+                                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-rose-500/10 via-pink-500/10 to-amber-500/5 border border-rose-400/40 dark:border-rose-800/60 space-y-3">
+                                    <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-rose-700 dark:text-rose-300">
+                                      <Sparkles className="h-4 w-4 text-rose-500" />
                                       <span>Interview-Ready Model Answer (60-Second Verbal Response)</span>
                                     </div>
-                                    <div className="answer-lead text-foreground/95 selection:bg-primary/20">
+                                    <div className="answer-lead text-foreground/95 selection:bg-rose-500/20">
                                       <FormattedAnswer text={q.interview_ready_answer} variant="lead" />
                                     </div>
                                   </div>
@@ -1104,7 +1104,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
               </div>
               <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-primary to-accent-emerald rounded-full"
+                  className="h-full bg-gradient-to-r from-rose-500 to-emerald-500 rounded-full"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -1120,7 +1120,7 @@ export function ReadingModeClient({ initialData, techSlug }: ReadingModeClientPr
                     className="flex items-center justify-between text-xs font-bold text-foreground px-2 py-1.5 rounded-lg bg-muted/40"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-primary" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
                       <span>{tier.level_code} • {tier.label}</span>
                     </span>
                     <span className="font-mono text-[11px] text-muted-foreground font-semibold">

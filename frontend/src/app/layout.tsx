@@ -85,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark overflow-x-hidden max-w-full">
+    <html lang="en" className="overflow-x-hidden max-w-full">
       <head>
         <script
           type="application/ld+json"

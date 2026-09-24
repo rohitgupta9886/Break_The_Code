@@ -204,7 +204,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 
           {/* Active File Tab */}
           <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-[#0d1117] border border-[#30363d] border-b-transparent text-xs font-mono text-[#e6edf3] font-semibold shrink-0 shadow-xs">
-            <FileCode2 className="h-3.5 w-3.5 text-indigo-400" />
+            <FileCode2 className="h-3.5 w-3.5 text-rose-400" />
             <span>{defaultFilename}</span>
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-xs" title="Ready to execute" />
           </div>
@@ -213,7 +213,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         {/* Right Action Bar: Language Tag + Copy Button */}
         <div className="flex items-center gap-2 shrink-0">
           <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase tracking-wider bg-[#21262d] text-[#8b949e] border border-[#30363d]">
-            <Terminal className="h-3 w-3 text-cyan-400" />
+            <Terminal className="h-3 w-3 text-rose-400" />
             {language}
           </span>
 

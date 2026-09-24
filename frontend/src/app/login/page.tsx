@@ -105,8 +105,8 @@ function LoginForm() {
   return (
     <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
       {/* Background ambient decorative glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 dark:bg-primary/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-accent-cyan/10 dark:bg-accent-cyan/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-amber-500/10 dark:bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center relative z-10">
         <div className="inline-flex justify-center mb-4">
@@ -122,7 +122,7 @@ function LoginForm() {
               <button
                 type="button"
                 onClick={() => { setMode("register"); setError(null); }}
-                className="font-bold text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4"
+                className="font-bold text-rose-600 hover:text-rose-500 dark:text-rose-400 cursor-pointer underline underline-offset-4"
               >
                 Create an account
               </button>
@@ -133,7 +133,7 @@ function LoginForm() {
               <button
                 type="button"
                 onClick={() => { setMode("login"); setError(null); }}
-                className="font-bold text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4"
+                className="font-bold text-rose-600 hover:text-rose-500 dark:text-rose-400 cursor-pointer underline underline-offset-4"
               >
                 Sign in here
               </button>
@@ -143,16 +143,16 @@ function LoginForm() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="bg-surface/95 backdrop-blur-xl py-8 px-5 shadow-elevation-2 sm:rounded-2xl sm:px-10 border border-border/80 transition-all">
+        <div className="bg-card/90 backdrop-blur-xl py-8 px-5 shadow-2xl sm:rounded-3xl sm:px-10 border border-rose-200/80 dark:border-rose-900/60 transition-all">
           
           {/* Quick Demo Access Bar */}
           <div className="mb-6 pb-6 border-b border-border/70">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Terminal className="h-3.5 w-3.5 text-primary" />
+                <Terminal className="h-3.5 w-3.5 text-rose-500" />
                 1-Click Instant Demo Login
               </span>
-              <span className="text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full border border-primary/20">
+              <span className="text-[10px] bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-bold px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-900">
                 Pre-configured
               </span>
             </div>
@@ -162,9 +162,9 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemo("admin")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-bold transition-all shadow-2xs hover:scale-[1.02] cursor-pointer"
+                className="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-purple-500/30 bg-purple-50/50 dark:bg-purple-950/20 hover:bg-purple-100/70 dark:hover:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-xs font-bold transition-all shadow-2xs hover:scale-[1.02] cursor-pointer"
               >
-                <ShieldCheck className="h-4 w-4 text-purple-500" />
+                <ShieldCheck className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                 <span>Admin Login</span>
               </button>
 
@@ -172,9 +172,9 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleQuickDemo("candidate")}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold transition-all shadow-2xs hover:scale-[1.02] cursor-pointer"
+                className="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-rose-500/30 bg-rose-50/50 dark:bg-rose-950/20 hover:bg-rose-100/70 dark:hover:bg-rose-900/40 text-rose-700 dark:text-rose-300 text-xs font-bold transition-all shadow-2xs hover:scale-[1.02] cursor-pointer"
               >
-                <Sparkles className="h-4 w-4 text-primary" />
+                <Sparkles className="h-4 w-4 text-rose-600 dark:text-rose-400" />
                 <span>Candidate Demo</span>
               </button>
             </div>
@@ -259,7 +259,7 @@ function LoginForm() {
                   <input
                     type="checkbox"
                     defaultChecked
-                    className="h-3.5 w-3.5 rounded border-border text-primary focus:ring-primary"
+                    className="h-3.5 w-3.5 rounded border-rose-300 text-rose-600 focus:ring-rose-500"
                   />
                   <span>Remember session</span>
                 </label>
@@ -273,7 +273,7 @@ function LoginForm() {
               type="submit"
               disabled={isLoading}
               variant="primary"
-              className="w-full h-11 rounded-xl font-bold text-sm shadow-sm shadow-primary/20 mt-2"
+              className="w-full h-11 rounded-xl font-bold text-sm shadow-md shadow-rose-500/20 mt-2"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
@@ -309,7 +309,7 @@ export default function LoginPage() {
   return (
     <Suspense fallback={
       <div className="min-h-[70vh] flex items-center justify-center">
-        <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <div className="h-8 w-8 rounded-full border-2 border-rose-500 border-t-transparent animate-spin" />
       </div>
     }>
       <LoginForm />

@@ -474,16 +474,16 @@ export default function AdminUsersPage() {
 
       {/* Metric KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-card border border-border/80 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-card border border-rose-200/80 dark:border-rose-900/60 shadow-xs">
           <div className="flex items-center justify-between text-muted-foreground mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Total Accounts</span>
-            <Users className="h-4 w-4 text-primary" />
+            <Users className="h-4 w-4 text-rose-500" />
           </div>
           <div className="text-2xl font-black text-foreground">{stats.total}</div>
           <div className="text-xs text-muted-foreground mt-1">Registered platform candidates</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-card border border-emerald-500/25 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-card border border-emerald-200/80 dark:border-emerald-900/60 shadow-xs">
           <div className="flex items-center justify-between text-muted-foreground mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Active Status</span>
             <UserCheck className="h-4 w-4 text-emerald-500" />
@@ -492,7 +492,7 @@ export default function AdminUsersPage() {
           <div className="text-xs text-muted-foreground mt-1">Unrestricted active users</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-card border border-purple-500/25 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-card border border-purple-200/80 dark:border-purple-900/60 shadow-xs">
           <div className="flex items-center justify-between text-muted-foreground mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Admin Staff</span>
             <ShieldCheck className="h-4 w-4 text-purple-500" />
@@ -501,7 +501,7 @@ export default function AdminUsersPage() {
           <div className="text-xs text-muted-foreground mt-1">Super Admin &amp; Staff roles</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-card border border-amber-500/25 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-card border border-amber-200/80 dark:border-amber-900/60 shadow-xs">
           <div className="flex items-center justify-between text-muted-foreground mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Logged In (24h)</span>
             <Flame className="h-4 w-4 text-amber-500" />
@@ -512,7 +512,7 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-card p-4 rounded-2xl border border-border/80 shadow-2xs">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-card p-4 rounded-2xl border border-border/80 shadow-xs">
         <div className="relative flex-1 max-w-md">
           <Input
             placeholder="Search users by name or email..."
@@ -530,7 +530,7 @@ export default function AdminUsersPage() {
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="bg-background border border-border/80 text-foreground text-xs rounded-xl px-2.5 py-2 font-medium focus:ring-1 focus:ring-primary cursor-pointer"
+              className="bg-background border border-border/80 text-foreground text-xs rounded-xl px-2.5 py-2 font-medium focus:ring-1 focus:ring-rose-500 cursor-pointer"
             >
               <option value="ALL">All Roles</option>
               <option value="SUPER_ADMIN">Super Admin</option>
@@ -543,7 +543,7 @@ export default function AdminUsersPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-background border border-border/80 text-foreground text-xs rounded-xl px-2.5 py-2 font-medium focus:ring-1 focus:ring-primary cursor-pointer"
+            className="bg-background border border-border/80 text-foreground text-xs rounded-xl px-2.5 py-2 font-medium focus:ring-1 focus:ring-rose-500 cursor-pointer"
           >
             <option value="ALL">All Status</option>
             <option value="ACTIVE">Active Only</option>
@@ -553,7 +553,7 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Users Telemetry & CRUD Table */}
-      <div className="bg-card rounded-2xl border border-border/80 shadow-elevation-1 overflow-hidden">
+      <div className="bg-card rounded-3xl border border-rose-200/80 dark:border-rose-900/60 shadow-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
@@ -563,7 +563,7 @@ export default function AdminUsersPage() {
                 <th className="py-3.5 px-4 font-bold">Account Status</th>
                 <th className="py-3.5 px-4 font-bold">
                   <div className="flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5 text-amber-500" />
+                    <Clock className="h-3.5 w-3.5 text-rose-500" />
                     Last Login Details
                   </div>
                 </th>
@@ -735,10 +735,10 @@ export default function AdminUsersPage() {
       {/* CREATE USER MODAL */}
       {isCreateOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-surface w-full max-w-md rounded-2xl border border-border/80 p-6 shadow-elevation-3 space-y-5">
+          <div className="bg-card w-full max-w-md rounded-3xl border border-rose-200/80 dark:border-rose-900/60 p-6 shadow-2xl space-y-5">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <UserPlus className="h-5 w-5 text-primary" />
+                <UserPlus className="h-5 w-5 text-rose-500" />
                 Add New Candidate / Admin
               </h3>
               <button
@@ -817,7 +817,7 @@ export default function AdminUsersPage() {
                         type="checkbox"
                         checked={formIsActive}
                         onChange={(e) => setFormIsActive(e.target.checked)}
-                        className="h-4 w-4 rounded text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded text-rose-600 focus:ring-rose-500"
                       />
                       <span>Active</span>
                     </label>
@@ -851,10 +851,10 @@ export default function AdminUsersPage() {
       {/* EDIT USER MODAL */}
       {isEditOpen && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-surface w-full max-w-md rounded-2xl border border-border/80 p-6 shadow-elevation-3 space-y-5">
+          <div className="bg-card w-full max-w-md rounded-3xl border border-rose-200/80 dark:border-rose-900/60 p-6 shadow-2xl space-y-5">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <Edit2 className="h-5 w-5 text-primary" />
+                <Edit2 className="h-5 w-5 text-rose-500" />
                 Edit User Details
               </h3>
               <button

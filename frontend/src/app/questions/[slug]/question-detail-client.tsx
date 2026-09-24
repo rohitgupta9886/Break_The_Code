@@ -78,13 +78,13 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
           {question.technology_name}
         </Link>
         <ChevronRight className="h-3.5 w-3.5" />
-        <span className="font-mono text-[11px] sm:text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-md font-semibold border border-primary/20">
+        <span className="font-mono text-[11px] sm:text-xs text-foreground bg-rose-100/70 dark:bg-rose-900/40 px-2 py-0.5 rounded-md font-semibold">
           {question.difficulty}
         </span>
       </nav>
 
-      {/* 2. Top Header Container */}
-      <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-8 shadow-elevation-1 space-y-6">
+      {/* 2. Top Header Container - Blush Rose Theme Card */}
+      <div className="rounded-3xl border border-rose-200/90 dark:border-rose-900/60 bg-[#fff2f4] dark:bg-rose-950/25 p-5 sm:p-9 shadow-sm shadow-rose-100/50 space-y-6">
         
         {/* Badges Row */}
         <div className="flex items-center justify-between gap-3 flex-wrap">
@@ -93,8 +93,8 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
             <DifficultyBadge difficulty={question.difficulty} size="md" />
             <InterviewDepthBadge depth={question.interview_depth} />
             {isProduction && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/25">
-                <Activity className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-teal-500/15 text-teal-700 dark:text-teal-300 border border-teal-500/30">
+                <Activity className="h-3.5 w-3.5 animate-pulse" />
                 Production Scenario
               </span>
             )}
@@ -124,11 +124,11 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
         </div>
 
         {/* Real Interview Company Provenance & Seniority Target */}
-        <div className="p-4 sm:p-5 rounded-xl bg-surface-elevated/70 border border-border/80 shadow-2xs space-y-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/85 dark:bg-black/35 border border-rose-200/90 dark:border-rose-900/50 shadow-sm space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mr-1">
-                <Building2 className="h-4 w-4 text-indigo-400" />
+                <Building2 className="h-4 w-4 text-rose-500" />
                 <span>Verified Loops:</span>
               </span>
               {question.tags && question.tags.length > 0 ? (
@@ -144,14 +144,14 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
                     uber: "bg-neutral-800/15 dark:bg-white/15 text-foreground border-foreground/30",
                     apple: "bg-slate-500/15 text-slate-800 dark:text-slate-200 border-slate-500/35",
                     microsoft: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/35",
-                  }[tag.slug] || "bg-surface text-foreground border-border";
+                  }[tag.slug] || "bg-white dark:bg-card text-foreground border-border";
 
                   return (
                     <span
                       key={tag.slug}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold border shadow-2xs ${companyClass}`}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold border shadow-2xs ${companyClass}`}
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
+                      <span className="h-2 w-2 rounded-full bg-current opacity-80" />
                       {tag.name}
                     </span>
                   );
@@ -165,14 +165,14 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
 
             {/* Cited primary sources badge */}
             {question.sources && question.sources.length > 0 && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 rounded-full">
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-full">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 <span>{question.sources.length} Official Specs Cited</span>
               </span>
             )}
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/60 text-xs sm:text-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-rose-100 dark:border-rose-950/60 text-xs sm:text-sm">
             <div className="flex items-center gap-2 text-foreground font-semibold">
               <Briefcase className="h-4 w-4 text-primary" />
               <span>Target Loop:</span>
@@ -191,16 +191,16 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
         </div>
 
         {/* Action Controls Bar: [Think] [Hint] [Show Answer] [Save] [Share] */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-border/60">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-rose-200/80 dark:border-rose-900/50">
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => {
                 const el = document.getElementById("think-mode-section");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="inline-flex items-center justify-center gap-1.5 min-h-[40px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500/10 text-amber-500 border border-amber-500/25 hover:bg-amber-500/20 transition-all cursor-pointer shadow-2xs"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500/15 text-amber-800 dark:text-amber-200 border border-amber-500/30 hover:bg-amber-500/25 transition-all cursor-pointer"
             >
-              <Zap className="h-4 w-4 text-amber-400" />
+              <Zap className="h-4 w-4" />
               <span>Think Mode</span>
             </button>
 
@@ -209,15 +209,15 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
                 const el = document.getElementById("think-mode-section");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="inline-flex items-center justify-center gap-1.5 min-h-[40px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-surface-elevated text-foreground border border-border/80 hover:bg-surface transition-all cursor-pointer shadow-2xs"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-500/15 text-sky-800 dark:text-sky-200 border border-sky-500/30 hover:bg-sky-500/25 transition-all cursor-pointer"
             >
-              <Lightbulb className="h-4 w-4 text-amber-400" />
+              <Lightbulb className="h-4 w-4" />
               <span>View Hints ({question.hints?.length || 3})</span>
             </button>
 
             <button
               onClick={() => setIsAnswerRevealed(!isAnswerRevealed)}
-              className="inline-flex items-center justify-center gap-1.5 min-h-[40px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer shadow-xs shadow-primary/20"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer shadow-sm shadow-primary/30"
             >
               <Sparkles className="h-4 w-4" />
               <span>{isAnswerRevealed ? "Hide Model Answer" : "Show Model Answer"}</span>
@@ -227,10 +227,10 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={handleToggleBookmark}
-              className={`min-h-[40px] px-3.5 py-2 rounded-xl border text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`min-h-[44px] px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                 isBookmarked 
-                  ? "bg-amber-500/20 text-amber-500 border-amber-500/40" 
-                  : "bg-surface-elevated text-muted-foreground border-border/80 hover:text-foreground"
+                  ? "bg-amber-500/20 text-amber-600 border-amber-500/40" 
+                  : "bg-white/60 dark:bg-white/10 text-muted-foreground border-rose-200/80 dark:border-rose-900/50 hover:text-foreground"
               }`}
               title="Save Question"
               aria-label="Save Question"
@@ -241,7 +241,7 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
 
             <button
               onClick={handleShare}
-              className="min-h-[40px] px-3.5 py-2 rounded-xl border border-border/80 bg-surface-elevated text-muted-foreground hover:text-foreground text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
+              className="min-h-[44px] px-3.5 py-2.5 rounded-xl border border-rose-200/80 dark:border-rose-900/50 bg-white/60 dark:bg-white/10 text-muted-foreground hover:text-foreground text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
               title="Share Link"
               aria-label="Share Link"
             >
@@ -254,7 +254,7 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
       </div>
 
       {/* 3. Content Quality & Trust Signals Banner */}
-      <div className="rounded-xl border border-border/70 bg-surface-elevated/40 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm font-mono text-muted-foreground shadow-2xs">
+      <div className="rounded-2xl border border-purple-200/90 dark:border-purple-900/60 bg-[#f5f3ff] dark:bg-purple-950/25 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm font-mono text-muted-foreground shadow-sm shadow-purple-100/40">
         <div className="flex flex-wrap items-center gap-3">
           <span className="font-bold text-foreground uppercase tracking-wider text-xs">
             CONTENT QUALITY:
@@ -269,7 +269,7 @@ export function QuestionDetailClient({ question }: QuestionDetailClientProps) {
             <span>Tier-1 Calibrated</span>
           </span>
           <span>•</span>
-          <span className="inline-flex items-center gap-1 text-primary font-semibold">
+          <span className="inline-flex items-center gap-1 text-rose-700 dark:text-rose-300 font-semibold">
             <BookOpen className="h-4 w-4" />
             <span>Authoritative Specs Cited</span>
           </span>
