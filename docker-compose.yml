@@ -1,28 +1,30 @@
-version: '3.8'
-
 services:
   postgres:
     image: pgvector/pgvector:pg16
     container_name: btc_postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: btc_user
-      POSTGRES_PASSWORD: btc_password
-      POSTGRES_DB: breakthecode
+      POSTGRES_USER: ${POSTGRES_USER:-btc_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-btc_password}
+      POSTGRES_DB: ${POSTGRES_DB:-breakthecode}
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U btc_user -d breakthecode"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-btc_user} -d ${POSTGRES_DB:-breakthecode}"]
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - btc_network
 
   redis:
     image: redis:7.2-alpine
     container_name: btc_redis
+    restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6380:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -30,32 +32,69 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - btc_network
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: btc_backend
+    restart: unless-stopped
     env_file:
-      - .env
+      - path: .env
+        required: false
+    environment:
+      - ENVIRONMENT=production
+      - PROJECT_NAME=Break The Code
+      - API_V1_STR=/api/v1
+      - DATABASE_URL=${DATABASE_URL:-sqlite+aiosqlite:///./breakthecode.db}
+      - SYNC_DATABASE_URL=${SYNC_DATABASE_URL:-sqlite:///./breakthecode.db}
+      - REDIS_URL=redis://redis:6379/0
+      - FRONTEND_URL=http://localhost:3000
     ports:
-      - "8000:8000"
+      - "8001:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+    networks:
+      - btc_network
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:8001/api/v1
     container_name: btc_frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - NEXT_PUBLIC_API_URL=http://localhost:8001/api/v1
+      - INTERNAL_API_URL=http://backend:8000/api/v1
+      - INTERNAL_API_HOST=http://backend:8000
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    networks:
+      - btc_network
 
 volumes:
   postgres_data:
   redis_data:
+
+networks:
+  btc_network:
+    driver: bridge

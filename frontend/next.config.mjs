@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   compress: true,
   experimental: {
@@ -31,10 +32,11 @@ const nextConfig = {
     ];
   },
   async rewrites() {
+    const backendHost = process.env.INTERNAL_API_HOST || 'http://127.0.0.1:8000';
     return [
       {
         source: '/api/:path*',
-        destination: 'http://127.0.0.1:8000/api/:path*',
+        destination: `${backendHost}/api/:path*`,
       },
     ];
   },

@@ -67,6 +67,7 @@ app.add_middleware(
 
 # Liveness and Readiness Probes
 @app.get("/health", tags=["system"], status_code=status.HTTP_200_OK)
+@app.get(f"{settings.API_V1_STR}/health", tags=["system"], status_code=status.HTTP_200_OK)
 async def health_check():
     return {"status": "ok", "service": "Break The Code API"}
 

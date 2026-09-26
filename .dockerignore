@@ -1,0 +1,13 @@
+**/.git
+**/.gitignore
+**/.vscode
+**/.idea
+**/node_modules
+**/.next
+**/__pycache__
+**/*.pyc
+**/*.bak
+**/*.bak*
+**/*.db-shm
+**/*.db-wal
+**/tests
